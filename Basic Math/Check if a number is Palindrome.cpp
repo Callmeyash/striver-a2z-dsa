@@ -1,4 +1,4 @@
-Check if a number is Palindrome or Not
+//Check if a number is Palindrome or Not
 
 #include <iostream>
 using namespace std;

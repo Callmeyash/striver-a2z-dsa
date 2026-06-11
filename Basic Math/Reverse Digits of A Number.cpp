@@ -1,4 +1,4 @@
-Reverse Digits of A Number
+//Reverse Digits of A Number
 
 #include <iostream>
 using namespace std;
