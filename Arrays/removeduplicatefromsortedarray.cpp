@@ -4,6 +4,18 @@
 #include<unordered_set>
 using namespace std;
 
+int removeo(vector<int>& arr){
+    if(arr.size() == 0) return 0;
+        int i = 0;
+        for(int j = 1; j < arr.size(); j++) {
+            if(arr[j] != arr[i]) {
+                i++;
+                arr[i] = arr[j];
+            }
+        }
+        return i + 1;
+    }
+
 void remove(vector<int>& arr){
     sort(arr.begin(),arr.end());
     for(int i = 0;i<arr.size()-1;i++){
