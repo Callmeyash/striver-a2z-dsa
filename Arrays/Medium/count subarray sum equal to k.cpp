@@ -54,8 +54,8 @@ int countsubarray2(vector<int> nums,int target){
 }
 
 int main(){
-    vector<int> arr = {1,2,3,-2,5};
-    int k = 5;
+    vector<int> arr = {1,2,1,3,1};
+    int k = 4;
     cout<<countsubarray2(arr,k);
     return 0;
 }
