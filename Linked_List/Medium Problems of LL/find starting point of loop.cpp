@@ -33,10 +33,10 @@ Node* convertarr2dll(vector<int>& arr){
 }
 //O(N),O(1)
 Node* cycledetection(Node* head){
-    if(head==NULL || head->next == NULL ) return head;
+    if(head==NULL || head->next == NULL ) return NULL;
     Node* slow = head;
     Node* fast = head;
-    while(fast!=NULL && fast->next->next !=NULL){
+    while(fast!=NULL && fast->next !=NULL){
         slow = slow->next;
         fast = fast->next->next;
         if(slow==fast){
