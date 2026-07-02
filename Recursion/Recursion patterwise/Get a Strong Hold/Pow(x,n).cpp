@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int pow(int x, int n){
+int solve(int x,int n){
     if(n==0){
         return 1;
     }
@@ -11,7 +11,14 @@ int pow(int x, int n){
     }
     else{
         return half*half*x;
+}
+}
+int pow(int x, int n){
+    if(n<0){
+        x = 1/x;
+        n = -n;
     }
+    return solve(x,n);
 }
 
 int main(){
