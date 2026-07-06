@@ -1,52 +1,42 @@
-#include <bits/stdc++.h>
+#include<iostream>
+#include<vector>
 using namespace std;
 
-class Solution {
-public:
+//Time Complexity: O(2t * k) due to exploring all combinations up to the target with copying each valid combination of average length k.
 
-    void solve(int index,
-               int target,
-               vector<int>& nums,
-               vector<int>& temp,
-               vector<vector<int>>& ans){
+//Space Complexity: O(k * x) to store all valid combinations, where x is the number of combinations and k is their average length.
 
+void solve(int index,vector<int> &arr,int target,vector<int> &ds,vector<vector<int>> &ans){
+    if(index==arr.size()){
         if(target==0){
-
-            ans.push_back(temp);
-
-            return;
+            ans.push_back(ds);
         }
+        return;
+    }
+    if(arr[index]<=target){
+        ds.push_back(arr[index]);
+        solve(index,arr,target-arr[index],ds,ans);
+        ds.pop_back();
+    }
+    solve(index+1,arr,target,ds,ans);
+}
 
-        if(index==nums.size())
-            return;
+vector<vector<int>> combinationsum(vector<int> &candidates, int target){
+    vector<vector<int>> ans;
+    vector<int> ds;
+    solve(0, candidates,target,ds,ans);
+    return ans;
+}
 
-        // Pick
-        if(nums[index]<=target){
-
-            temp.push_back(nums[index]);
-
-            solve(index,
-                  target-nums[index],
-                  nums,
-                  temp,
-                  ans);
-
-            temp.pop_back();
+int main(){
+    vector<int> arr = {2,3,6,7};
+    int target = 7;
+    vector<vector<int>> ans = combinationsum(arr,target);
+    for(auto i : ans){
+        for(auto j : i){
+            cout<<j<<" ";
         }
-
-        // Don't Pick
-        solve(index+1,
-              target,
-              nums,
-              temp,
-              ans);
+        cout<<endl;
     }
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> ans;
-
-        vector<int> temp;
-        solve(0,target,candidates,temp,ans);
-
-        return ans;
-    }
-};
+    return 0;
+}

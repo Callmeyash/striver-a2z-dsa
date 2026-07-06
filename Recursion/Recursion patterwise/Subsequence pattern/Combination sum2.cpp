@@ -1,52 +1,41 @@
-class Solution {
-public:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
 
-    void solve(int index,
-               int target,
-               vector<int>& nums,
-               vector<int>& temp,
-               vector<vector<int>>& ans){
-
-        if(target==0){
-
-            ans.push_back(temp);
-
-            return;
-        }
-
-        for(int i=index;i<nums.size();i++){
-
-            // Skip duplicates
-            if(i>index && nums[i]==nums[i-1])
-                continue;
-
-            // Since array is sorted
-            if(nums[i]>target)
-                break;
-
-            temp.push_back(nums[i]);
-
-            solve(i+1,
-                  target-nums[i],
-                  nums,
-                  temp,
-                  ans);
-
-            temp.pop_back();
-        }
+void solve(int index,vector<int> &arr,int tar,vector<int> &ds,vector<vector<int>> &ans){
+    if(tar==0){
+        ans.push_back(ds);
+        return;
     }
-
-    vector<vector<int>> combinationSum2(vector<int>& nums,
-                                        int target){
-
-        sort(nums.begin(),nums.end());
-
-        vector<vector<int>> ans;
-
-        vector<int> temp;
-
-        solve(0,target,nums,temp,ans);
-
-        return ans;
+    for(int i = index;i<arr.size();i++){
+        if(i>index && arr[i]==arr[i-1]) continue;
+        if(arr[i]>tar) break;
+        ds.push_back(arr[i]);
+        solve(i+1,arr,tar-arr[i],ds,ans);
+        ds.pop_back();
     }
-};
+}
+
+vector<vector<int>> combinationsum2(vector<int> &candidates, int target){
+    sort(candidates.begin(),candidates.end());
+    vector<vector<int>> ans;
+    vector<int> ds;
+    solve(0, candidates,target,ds,ans);
+    return ans;
+}
+
+int main(){
+
+    vector<int> arr = {10,1,2,7,6,1,5};
+
+    int target = 8;
+
+    vector<vector<int>> ans = combinationsum2(arr, target);
+
+    for(auto v : ans){
+        for(int x : v)
+            cout << x << " ";
+        cout << endl;
+    }
+}
